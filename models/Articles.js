@@ -1,14 +1,14 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-let Article = new Schema({
+const ArticleSchema = new Schema({
 	title: {
 		type: String,
 		required: true
 	},
 	date: {
 		type: Date,
-		default: Data.now,
+		default: Date.now,
 		required: true
 	},
 	url: {
@@ -16,5 +16,7 @@ let Article = new Schema({
 		required: true
 	}
 });
+
+let Article = mongoose.model("Article", ArticleSchema);
 
 module.exports = Article;
