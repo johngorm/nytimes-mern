@@ -1,0 +1,29 @@
+{
+  "name": "nytimes-mern",
+  "version": "1.0.0",
+  "description": "Single page app that searches for NY Times articles",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev" : "webpack -w & node server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/johngorm/nytimes-mern.git"
+  },
+  "author": "John Gorman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/johngorm/nytimes-mern/issues"
+  },
+  "homepage": "https://github.com/johngorm/nytimes-mern#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "mongoose": "^4.10.7",
+    "morgan": "^1.8.2",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  }
+}
