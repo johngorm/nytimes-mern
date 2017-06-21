@@ -1,5 +1,5 @@
 const React = require('react');
-
+const Search = require('./Search.js');
 const Link = require('react-router').Link;
 
 const Main = React.createClass({
@@ -13,6 +13,8 @@ const Main = React.createClass({
 				        <p>Find articles that intrest you and save for future reference</p>
 			        </div>
 			    </div>
+			    <Search/>
+
 			</div>
 
 
