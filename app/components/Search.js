@@ -28,6 +28,22 @@ const Search = React.createClass({
 		}
 		
 	},
+	handleSubmit: function(event){
+		event.preventDefault();
+
+		//Set the parent to have the query params
+		let queryObj={
+			searchTerm: this.state.searchTerm,
+			beginYear: this.state.beginYear,
+			endYear: this.state.endYear
+		}
+		this.props.setQuery(queryObj);
+		this.setState({
+			searchTerm: "",
+			beginYear: "",
+			endYear: ""
+		})
+	},
 	render: function(){
 		return(
 			<div className="row">
