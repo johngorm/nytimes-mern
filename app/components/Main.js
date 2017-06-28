@@ -1,5 +1,6 @@
 const React = require('react');
 const Search = require('./Search.js');
+const Results = require('./Results.js');
 const Link = require('react-router').Link;
 const helpers = require('./utils/handlers');
 
@@ -10,12 +11,12 @@ const Main = React.createClass({
 			searchTerm: '',
 			beginYear: '',
 			endYear: '',
-			results: ''
+			results: []
 		}
 	},
 
 	componentDidUpdate: function(){
-		helpers.queryNYTimes(this.state.searchTerm., this.state.beginYear, this.state.endYear)
+		helpers.queryNYTimes(this.state.searchTerm, this.state.beginYear, this.state.endYear)
 			.then( function(searchResults) {
 				for(let ii in searchResults){
 					if(JSON.stringify(searchResults[ii]) === JSON.stringify(this.state.results[ii])){
@@ -46,6 +47,7 @@ const Main = React.createClass({
 			        </div>
 			    </div>
 			    <Search setQuery={this.setQuery}/>
+			    <Results results={this.state.results}/>
 
 			</div>
 
