@@ -7,7 +7,7 @@ const Results = React.createClass({
 		return(
 			<div className="row">
 				<div className="panel panel-default">
-		            <div className='pandel-heading'>
+		            <div className='panel-heading'>
 		                <h3 className="panel-title text-center">
 		                    <strong>Results</strong>
 		                </h3>
@@ -15,10 +15,13 @@ const Results = React.createClass({
 		            <div className='panel-body text-center'>
 		           	{this.props.results.map(function(article, i){
 			            	return(
-			            		<div key={i} className='article'>
-			            			<a href={article.web_url}><h2 className='artcileTitle'>{article.headline.main}</h2></a>
-			            			<p>{article.snippet}</p>
-			            		</div>
+			            		<form className='articleForm'>
+				            		<div key={i} className='article'>
+				            			<a href={article.web_url}><h2 className='artcileTitle'>{article.headline.main}</h2></a>
+				            			<span>{article.snippet}</span>
+				            			<button>Save</button>
+				            		</div>
+				            	</form>
 			            	)	
 			            })
 		       		}

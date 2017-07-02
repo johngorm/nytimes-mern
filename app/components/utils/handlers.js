@@ -17,12 +17,13 @@ let helper = {
 		// });
 
 
-		let queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" + NYT_API_KEY +  "&q=" + searchTerm.split('').join('+') + "&begin_date=" 
-			+ beginYear + "0101&end_date=" + endYear + '1231';
+		let queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" + searchTerm.split('').join('+') + "&page=1&sort=newest&begin_date=" 
+			+ beginYear + "0101&end_date=" + endYear + '1231' + '&api-key=' + NYT_API_KEY;
 
 
 		return axios.get(queryURL).then( (response) =>{
 			let articles = response.data.response.docs;
+			console.log(articles);
 			let top_articles = [];
 			if(articles[0]){
 				for(let ii = 0; ii < Math.min(articles.length, 5); ii++){
@@ -43,7 +44,7 @@ let helper = {
 
 	//Function to save article to db
 	saveArticle: function(articleInfo){
-		axios.post('/api/saved',{
+		return axios.post('/api/saved',{
 			title: articleInfo.headline.main,
 			url: articleInfo.web_url
 		})
@@ -58,12 +59,20 @@ let helper = {
 
 	//Function to get all saved articles in db
 	getSavedArticles: function(){
-		return axios.get('/api/saved');
+		return axios.get('/api/saved')
+		.then( (response) =>{
+			console.log(response.data)
+			return response.data
+		})
+		.catch( (error) =>{
+			console.error(error)
+			throw error
+		});
 	},
 
 	//Function to call api route to remove saved article
 	deleteSavedArticle: function(articleID){
-		axios.delete('/api/saved/'+arcticleID)
+		return axios.delete('/api/saved/'+arcticleID)
 			.then( (response) =>{
 				return axios.get('/api/saved');
 			})

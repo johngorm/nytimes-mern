@@ -1,6 +1,7 @@
 const React = require('react');
 const Search = require('./Search.js');
 const Results = require('./Results.js');
+const Saved = require('./Saved.js');
 const Link = require('react-router').Link;
 const helpers = require('./utils/handlers');
 
@@ -11,21 +12,33 @@ const Main = React.createClass({
 			searchTerm: '',
 			beginYear: '',
 			endYear: '',
-			results: []
+			results: [],
+			saved_articles: []
 		}
+	},
+
+	componentDidMount: function(){
+		console.log(helpers.getSavedArticles);
+		helpers.getSavedArticles()
+		.then(function(results){
+			this.setState({saved_articles: results})
+		}.bind(this));
 	},
 
 	componentDidUpdate: function(){
 		helpers.queryNYTimes(this.state.searchTerm, this.state.beginYear, this.state.endYear)
 			.then( function(searchResults) {
-				for(let ii in searchResults){
-					if(JSON.stringify(searchResults[ii]) === JSON.stringify(this.state.results[ii])){
-						return null
-					}
+				if(JSON.stringify(this.state.results) !== JSON.stringify(searchResults)){
+					
+					this.setState({results: searchResults});
 				}
-			
-				console.log('Results' + searchResults);
-				this.setState({results: searchResults});
+				helpers.getSavedArticles()
+				.then( function(savedArticles){
+		
+					if(JSON.stringify(this.state.saved_articles) !== JSON.stringify(savedArticles)){
+						this.setState({saved_articles: savedArticles});
+					}
+				}.bind(this))
 		}.bind(this));
 	},
 
@@ -38,6 +51,7 @@ const Main = React.createClass({
 	},
 
 	render: function(){
+
 		return(
 			<div className="container">
 			    <div className="row">
@@ -48,6 +62,7 @@ const Main = React.createClass({
 			    </div>
 			    <Search setQuery={this.setQuery}/>
 			    <Results results={this.state.results}/>
+			    <Saved saved={this.state.saved_articles}/>
 
 			</div>
 
