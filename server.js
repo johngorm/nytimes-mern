@@ -61,8 +61,20 @@ app.post('/api/saved', (req, res) =>{
 
 });
 
-app.delete('/api/saved', (req, res) =>{
-
+app.delete('/api/saved/:id', (req, res) =>{
+	Article.remove({
+		where:{
+			id: req.params.id
+		}
+	}, (error) =>{
+		if(error) {
+			console.log(error)
+			throw error
+		}
+		else{
+			res.send("Document deleted")
+		}
+	})
 });
 
 app.get('/', (req, res) =>{
