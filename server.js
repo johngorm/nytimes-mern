@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.text());
 app.use(bodyParser.json({type: 'application/vnd.api+json'}));
 
-
+app.use(express.static('./public'));
 
 //Connect to the mongo database with mongoose
 mongoose.connect('localhost:/nytreact');
@@ -65,8 +65,8 @@ app.delete('/api/saved', (req, res) =>{
 
 });
 
-app.get('*', (req, res) =>{
-
+app.get('/', (req, res) =>{
+	res.sendFile(__dirname + "/public/index.html");
 });
 
 
