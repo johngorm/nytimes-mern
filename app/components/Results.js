@@ -1,6 +1,14 @@
 const React = require('react');
-
+const helpers = require('./utils/handlers.js')
 const Results = React.createClass({
+
+	saveArticle: function(event){
+		event.preventDefault();
+		console.log(this)
+		
+
+
+	},
 
 	render: function(){
 		
@@ -15,11 +23,11 @@ const Results = React.createClass({
 		            <div className='panel-body text-center'>
 		           	{this.props.results.map(function(article, i){
 			            	return(
-			            		<form className='articleForm'>
+			            		<form className='articleForm' onSubmit="saveArticle">
 				            		<div key={i} className='article'>
-				            			<a href={article.web_url}><h2 className='artcileTitle'>{article.headline.main}</h2></a>
+				            			<a href={article.web_url} name='url'><h2 className='artcileTitle' name='title'>{article.headline.main}</h2></a>
 				            			<span>{article.snippet}</span>
-				            			<button>Save</button>
+				            			<input type="submit" value="Save"></input>
 				            		</div>
 				            	</form>
 			            	)	

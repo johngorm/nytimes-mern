@@ -16,7 +16,7 @@ app.use(bodyParser.json({type: 'application/vnd.api+json'}));
 app.use(express.static('./public'));
 
 //Connect to the mongo database with mongoose
-mongoose.connect('localhost:/nytreact');
+mongoose.connect('mongodb://heroku_xwgl6fzs:8b7umu5r3pi6dndom0o1ei751q@ds145312.mlab.com:45312/heroku_xwgl6fzs');
 const db = mongoose.connection;
 
 db.on('error', function(error){

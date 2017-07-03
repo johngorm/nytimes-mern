@@ -43,10 +43,10 @@ let helper = {
 	},
 
 	//Function to save article to db
-	saveArticle: function(articleInfo){
+	saveArticle: function(articleTitle, articleURL){
 		return axios.post('/api/saved',{
-			title: articleInfo.headline.main,
-			url: articleInfo.web_url
+			title: articleTitle,
+			url: articleURL
 		})
 		.then( (response) =>{
 			console.log(response);
